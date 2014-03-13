@@ -8,9 +8,17 @@ Gem::Specification.new do |spec|
   spec.version       = Google::Oauth2::Installed::VERSION
   spec.authors       = ["Amiel Martin"]
   spec.email         = ["amiel@carnesmedia.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{
+    Configure and authenticate to google with OAuth2 as an installed application
+  }
+
+  spec.description   = %q{
+    Extracted from applications that use the DFP and Analytics apis,
+    google-oauth2-installed helps with configuration (from ENV).
+    It also helps with setup by providing an easy command to generate your OAuth tokens.
+  }
+
+  spec.homepage      = "https://github.com/carnesmedia/google-oauth2-installed"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
