@@ -4,6 +4,8 @@ module GoogleOauth2Installed
   class Setup < Struct.new(:credentials)
 
     def get_access_token
+      checks.check_for_environment!
+
       auth_url = get_auth_url
       auth_code = ask_for_code auth_url
 
@@ -13,6 +15,10 @@ module GoogleOauth2Installed
     end
 
     private
+
+    def checks
+      Checks.new credentials
+    end
 
     def client
       oauth2_info = credentials.values_at :oauth2_client_id, :oauth2_client_secret, :oauth2_urls

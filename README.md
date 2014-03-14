@@ -9,6 +9,10 @@ Extracted from applications that use the DFP and Analytics apis,
 google-oauth2-installed helps with configuration (from ENV).
 It also helps with setup by providing an easy command to generate your OAuth tokens.
 
+For more information about Installed
+* https://developers.google.com/accounts/docs/OAuth2InstalledApp
+
+
 
 ## Why
 
@@ -34,17 +38,68 @@ Add this line to your application's Gemfile:
 
     gem 'google-oauth2-installed'
 
-And then execute:
-
-    $ bundle
-
 Or install it yourself as:
 
     $ gem install google-oauth2-installed
 
+## Setup
+
+### Create an application in Google Cloud Console
+
+First, you need to create an application identifier in Google Cloud Console. Please follow
+[these instructions](https://github.com/googleads/google-api-ads-ruby/wiki/OAuth2#creating-an-application-identifier)
+lovingly copied (and only slightly altered) from the
+[google-api-ads-ruby library](https://github.com/googleads/google-api-ads-ruby).
+
+> Visit [Google Cloud Console](https://cloud.google.com/console) and:
+>
+> 1. Click **CREATE PROJECT** to create a new project.
+> 1. Enter the Project Name (and optionally, choose your own Project ID), and click **Create**.
+> 1. The newly created project should automatically open. Click **APIs & auth** to expand the menu, and then click **Credentials**.
+> 1. Click **CREATE NEW CLIENT ID** to create a new client identifier and client secret.
+> 1. Choose **Installed application**.
+> 1. Click **CREATE CLIENT ID** to complete the registration. Client ID and client secret will be created and displayed.
+>
+> ![API Access Page](https://developers.google.com/adwords/api/images/oauth2-client-id-secret.png)
+>
+> The Client ID and secret values are the parameters you will need in the next step.
+
+### Set up your credentials in order to retrieve an access token
+
+Define the following environment variables. I recommend using the
+[`dotenv`](https://github.com/bkeepers/dotenv) gem (`dotenv-rails` in rails projects)
+and adding these variables to a `.env` file.
+
+```
+OAUTH2_CLIENT_ID="..."
+OAUTH2_CLIENT_SECRET="..."
+OAUTH2_SCOPE="..."
+```
+
+`OAUTH2_SCOPE` is a space delimited list of the scopes your application will
+need access to. For example, for readonly access to analytics, and access to
+DFP, use:
+
+```
+OAUTH2_SCOPE="https://www.googleapis.com/auth/analytics.readonly https://www.google.com/apis/ads/publisher"
+```
+
+### Get your access token
+
+Once you have these environment variables defined, run this rake task and
+authenticate to google with the user you need access as.
+
+```
+rake googleoauthinstalled:get_access_token
+```
+
+
 ## Usage
 
-TODO: Write usage instructions here
+    Add `client_id` and `client_secret` to `.env` like:
+    ```
+    oauth2_client_id="..."
+    oauth2_client_secret="..."
 
 ## Contributing
 

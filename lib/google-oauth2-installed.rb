@@ -1,7 +1,10 @@
 require 'google-oauth2-installed/version'
+require 'google-oauth2-installed/setup'
+require 'google-oauth2-installed/access_token'
 
 module GoogleOauth2Installed
 
+  # A centralized place to access all loaded configuration and defaults.
   def self.credentials
     {
       method: 'OAuth2',

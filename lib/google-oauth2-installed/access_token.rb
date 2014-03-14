@@ -1,3 +1,5 @@
+require 'oauth2'
+
 module GoogleOauth2Installed
   class AccessToken < Struct.new(:credentials)
 
