@@ -1,5 +1,6 @@
 require 'google-oauth2-installed/version'
 require 'google-oauth2-installed/setup'
+require 'google-oauth2-installed/checks'
 require 'google-oauth2-installed/access_token'
 
 module GoogleOauth2Installed
@@ -12,7 +13,7 @@ module GoogleOauth2Installed
       oauth2_client_secret: ENV["OAUTH2_CLIENT_SECRET"],
       oauth2_token: oauth2_token,
       oauth2_scope: ENV['OAUTH2_SCOPE'],
-      oauth2_redirect_url: 'urn:ietf:wg:oauth:2.0:oob',
+      oauth2_redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
       oauth2_urls: {
         authorize_url: 'https://accounts.google.com/o/oauth2/auth',
         token_url: 'https://accounts.google.com/o/oauth2/token',
@@ -20,7 +21,7 @@ module GoogleOauth2Installed
     }
   end
 
-  def self.oauth_token
+  def self.access_token
     AccessToken.new(credentials).access_token
   end
 
@@ -42,3 +43,6 @@ module GoogleOauth2Installed
   end
 
 end
+
+
+require 'google-oauth2-installed/railtie' if defined?(Rails::Railtie)

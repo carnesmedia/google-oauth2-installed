@@ -56,13 +56,16 @@ module GoogleOauth2Installed
     end
 
     def redirect_uri
-      credentials[:redirect_uri]
+      credentials[:oauth2_redirect_uri]
     end
 
     def scope
       credentials[:oauth2_scope]
     end
 
+    extend Forwardable
+    def_delegator '$stdin', :gets
+    def_delegator '$stdout', :puts
   end
 end
 

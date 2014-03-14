@@ -93,13 +93,26 @@ authenticate to google with the user you need access as.
 rake googleoauthinstalled:get_access_token
 ```
 
+### Not in Rails?
+
+You might need to reference our rake task from your Rakefile. Try something like this:
+
+```ruby
+require 'rubygems'
+require 'bundler/setup'
+load 'tasks/get_access_token.rake'
+```
+
 
 ## Usage
 
-    Add `client_id` and `client_secret` to `.env` like:
-    ```
-    oauth2_client_id="..."
-    oauth2_client_secret="..."
+Add `client_id` and `client_secret` to `.env` like:
+
+```
+oauth2_client_id="..."
+oauth2_client_secret="..."
+```
+
 
 ## Contributing
 
