@@ -1,17 +1,15 @@
 # Google Oauth2 Installed
 
-Configure and authenticate to google with OAuth2 as an installed application.
+Configure and authenticate to Google with OAuth2 as an installed application.
 
-This is for when your application needs to authenticate to google services, as
-opposed to your applications users.
+This is for when your application needs to authenticate to Google services, as
+opposed to your application's users.
 
-Extracted from applications that use the DFP and Analytics apis,
-google-oauth2-installed helps with configuration (from ENV).
+Extracted from applications that use the DFP and Analytics APIs,
+`google-oauth2-installed` helps with configuration (from `ENV`).
 It also helps with setup by providing an easy command to generate your OAuth tokens.
 
-For more information about Installed
-* https://developers.google.com/accounts/docs/OAuth2InstalledApp
-
+For more information about Installed Apps: [https://developers.google.com/accounts/docs/OAuth2InstalledApp](https://developers.google.com/accounts/docs/OAuth2InstalledApp)
 
 
 ## Why
@@ -96,14 +94,17 @@ rake googleoauthinstalled:get_access_token
 
 ## Usage
 
-    Add `client_id` and `client_secret` to `.env` like:
-    ```
-    oauth2_client_id="..."
-    oauth2_client_secret="..."
+Add `client_id` and `client_secret` to `.env` like:
+
+```
+oauth2_client_id="..."
+oauth2_client_secret="..."
+```
+
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/google-oauth2-installed/fork )
+1. Fork it ([http://github.com/carnesmedia/google-oauth2-installed/fork](http://github.com/carnesmedia/google-oauth2-installed/fork))
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
