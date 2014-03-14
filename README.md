@@ -55,7 +55,7 @@ lovingly copied (and only slightly altered) from the
 > 1. Enter the Project Name (and optionally, choose your own Project ID), and click **Create**.
 > 1. The newly created project should automatically open. Click **APIs & auth** to expand the menu, and then click **Credentials**.
 > 1. Click **CREATE NEW CLIENT ID** to create a new client identifier and client secret.
-> 1. Choose **Installed application**.
+> 1. Choose **Installed application**, and **Other* for the "Installed application type".
 > 1. Click **CREATE CLIENT ID** to complete the registration. Client ID and client secret will be created and displayed.
 >
 > ![API Access Page](https://developers.google.com/adwords/api/images/oauth2-client-id-secret.png)
@@ -75,7 +75,7 @@ OAUTH2_SCOPE="..."
 ```
 
 `OAUTH2_SCOPE` is a space delimited list of the scopes your application will
-need access to. For example, for readonly access to analytics, and access to
+need access to. For example, for readonly access to analytics, and write access to
 DFP, use:
 
 ```
@@ -91,9 +91,26 @@ authenticate to google with the user you need access as.
 rake googleoauthinstalled:get_access_token
 ```
 
+This rake task will give you a url to load up in the browser. You will need to log in
+to Google, allow access to the requested scopes, and copy the provided code. Paste
+this code back in to the rake task that is waiting for you. It will then output the
+rest of the environment variables you need to authenticate.
+
+If you are using `.env`, it should now look something like:
+
+```shell
+OAUTH2_CLIENT_ID="..."
+OAUTH2_CLIENT_SECRET="..."
+OAUTH2_SCOPE="..."
+
+OAUTH2_ACCESS_TOKEN="..."
+OAUTH2_REFRESH_TOKEN="..."
+OAUTH2_EXPIRES_AT="..."
+```
+
 ### Not in Rails?
 
-You might need to reference our rake task from your Rakefile. Try something like this:
+You might need to reference our rake task from your `Rakefile`. Try something like this:
 
 ```ruby
 require 'rubygems'
@@ -101,16 +118,33 @@ require 'bundler/setup'
 load 'tasks/get_access_token.rake'
 ```
 
-
 ## Usage
 
-Add `client_id` and `client_secret` to `.env` like:
+Once you have all of your environment variables set up, just ask `GoogleOauth2Installed`
+for an access token. `GoogleOauth2Installed` will handle refreshing it if needed.
 
-```
-oauth2_client_id="..."
-oauth2_client_secret="..."
+Example usage with `Legato` for Analytics:
+
+```ruby
+Legato::User.new GoogleOauth2Installed.access_token
 ```
 
+If you just need the details (and not a refreshed access token), use
+`GoogleOauth2Installed.credentials`.
+
+Example usage with `DfpApi`:
+
+```ruby
+dfp_authentication = GoogleOauth2Installed.credentials.merge(
+  application_name: ENV['DFP_APPLICATION_NAME'],
+  network_code: ENV['DFP_NETWORK_CODE'],
+)
+
+::DfpApi::Api.new({
+  authentication: dfp_authentication,
+  service: { environment: 'PRODUCTION' },
+})
+```
 
 ## Contributing
 
