@@ -5,7 +5,7 @@ module GoogleOauth2Installed
 
     def access_token
       OAuth2::AccessToken.from_hash(client, token_hash).tap do |token|
-        token.refresh! if token.expired?
+        return token.refresh! if token.expired?
       end
     end
 
