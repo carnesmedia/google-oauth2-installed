@@ -88,13 +88,15 @@ Once you have these environment variables defined, run this rake task and
 authenticate to google with the user you need access as.
 
 ```
-rake googleoauthinstalled:get_access_token
+rake googleoauth2installed:get_access_token
 ```
 
 This rake task will give you a url to load up in the browser. You will need to log in
 to Google, allow access to the requested scopes, and copy the provided code. Paste
 this code back in to the rake task that is waiting for you. It will then output the
 rest of the environment variables you need to authenticate.
+
+(If the URL shows an error, you may need to supply a Product Name under the Consent Screen section of your Google Developers Console.)
 
 If you are using `.env`, it should now look something like:
 
