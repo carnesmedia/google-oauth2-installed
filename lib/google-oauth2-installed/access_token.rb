@@ -4,9 +4,8 @@ module GoogleOauth2Installed
   class AccessToken < Struct.new(:credentials)
 
     def access_token
-      OAuth2::AccessToken.from_hash(client, token_hash).tap do |token|
-        return token.refresh! if token.expired?
-      end
+      token = OAuth2::AccessToken.from_hash(client, token_hash)
+      token.expired? ? token.refresh! : token
     end
 
     private
