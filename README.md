@@ -62,6 +62,9 @@ lovingly copied (and only slightly altered) from the
 >
 > The Client ID and secret values are the parameters you will need in the next step.
 
+Then go to **Concent screen** and make sure **Email addresses* and **Product name** are filled in
+or you will get a `no application name` error.
+
 ### Set up your credentials in order to retrieve an access token
 
 Define the following environment variables. I recommend using the
