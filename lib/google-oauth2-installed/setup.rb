@@ -1,3 +1,5 @@
+require 'forwardable'
+
 module GoogleOauth2Installed
   # To be used interactively.
   # See `GoogleOauth2Installed.get_access_token`
